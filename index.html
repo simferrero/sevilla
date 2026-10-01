@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sevilla, 2 al 4 de octubre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F8FA; --paper:#FFFFFF; --ink:#1B2233; --ink2:#566076; --line:#E2E5EC;
+  --cobalto:#1F4E8C; --cobalto-soft:#E6EDF7; --albero:#C98A1E; --albero-soft:#FBF1DD;
+  --almagra:#9E3B2B; --cafe:#6F4A2E; --verde:#2F7A55; --morado:#6B4AA0; --tile:#FFFFFF;
+  --land:#EFF0EB; --park:#CFE5C6; --parkline:#B4D3A8; --river:#A9CDEE; --street:#FFFFFF; --casing:#D3D6DC;
+  --plaza:#F1EBDD; --bldg:#E0DCD2; --me:#1A73E8;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1420; --paper:#171E2E; --ink:#ECEEF3; --ink2:#A5ADBF; --line:#2A3347;
+    --cobalto:#86AEEA; --cobalto-soft:#1D2A44; --albero:#E7B458; --albero-soft:#33291A;
+    --almagra:#E88C76; --cafe:#C99A6E; --verde:#6FC79A; --morado:#B59AE6; --tile:#141B2A;
+    --land:#1A2130; --park:#213828; --parkline:#2B4833; --river:#244569; --street:#35405A; --casing:#252D40;
+    --plaza:#262B36; --bldg:#2C3242; --me:#6FA8FF;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1420; --paper:#171E2E; --ink:#ECEEF3; --ink2:#A5ADBF; --line:#2A3347;
+  --cobalto:#86AEEA; --cobalto-soft:#1D2A44; --albero:#E7B458; --albero-soft:#33291A;
+  --almagra:#E88C76; --cafe:#C99A6E; --verde:#6FC79A; --morado:#B59AE6; --tile:#141B2A;
+  --land:#1A2130; --park:#213828; --parkline:#2B4833; --river:#244569; --street:#35405A; --casing:#252D40;
+  --plaza:#262B36; --bldg:#2C3242; --me:#6FA8FF;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.5;-webkit-text-size-adjust:100%}
+a{color:var(--cobalto)}
+button{font:inherit}
+:focus-visible{outline:3px solid var(--albero);outline-offset:2px;border-radius:4px}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px 48px}
+
+header.top{padding:28px 0 10px}
+header.top h1{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:2.6rem;line-height:1.05;margin:0;color:var(--cobalto)}
+header.top p{margin:.5rem 0 0;color:var(--ink2)}
+
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);display:flex;gap:6px;overflow-x:auto;padding:10px 16px;margin:0 -16px;border-bottom:1px solid var(--line);scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:0 0 auto;font-size:.95rem;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:8px 14px;border-radius:999px;cursor:pointer}
+nav.tabs button[aria-selected="true"]{background:var(--cobalto);border-color:var(--cobalto);color:var(--paper)}
+
+section.panel{display:none;padding-top:18px}
+section.panel.on{display:block}
+
+.plaque{position:relative;background:var(--tile);border:3px solid var(--cobalto);border-radius:10px;padding:22px 18px 18px;text-align:center;color:var(--cobalto);
+  background-image:
+   radial-gradient(circle at 13px 13px,var(--albero) 3.5px,transparent 4.5px),
+   radial-gradient(circle at calc(100% - 13px) 13px,var(--albero) 3.5px,transparent 4.5px),
+   radial-gradient(circle at 13px calc(100% - 13px),var(--albero) 3.5px,transparent 4.5px),
+   radial-gradient(circle at calc(100% - 13px) calc(100% - 13px),var(--albero) 3.5px,transparent 4.5px)}
+.plaque::after{content:"";position:absolute;inset:6px;border:1px solid var(--cobalto);border-radius:6px;pointer-events:none}
+.plaque h2{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:2.1rem;line-height:1.1;margin:0}
+.plaque p{margin:.35rem 0 0;color:var(--ink2);font-size:.98rem}
+.stats{display:flex;justify-content:center;gap:18px;margin-top:10px;font-size:.9rem;color:var(--ink)}
+.stats b{color:var(--cobalto)}
+
+/* Mapa */
+.mv{position:relative;margin:16px 0 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--land);height:min(62vh,540px);min-height:320px}
+.mv.big{height:min(72vh,680px)}
+.mv svg{display:block;width:100%;height:100%;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
+.mv svg:active{cursor:grabbing}
+.mv-ctrl{position:absolute;right:10px;top:10px;display:flex;flex-direction:column;gap:6px}
+.mv-ctrl button{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-size:1.2rem;line-height:1;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.18);display:grid;place-items:center}
+.mv-ctrl button.me{color:var(--me)}
+.mv-chips{position:absolute;left:0;top:10px;right:58px;display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;padding:0 10px 4px;scrollbar-width:none}.mv-chips::-webkit-scrollbar{display:none}
+.mv-chips button{flex:0 0 auto}
+.mv-chips button{border:1px solid var(--line);background:var(--paper);color:var(--ink2);border-radius:999px;padding:5px 11px;font-size:.82rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.14);display:flex;align-items:center;gap:6px}
+.mv-chips button i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.mv-chips button[aria-pressed="true"]{color:var(--ink);font-weight:700;border-color:var(--ink2)}
+.mv-chips button[aria-pressed="false"] i{opacity:.35}
+.mv-hint{position:absolute;left:10px;bottom:8px;font-size:.75rem;color:var(--ink2);background:var(--paper);padding:2px 8px;border-radius:6px;opacity:.9}
+.mv-card{margin-top:8px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.mv-card[hidden]{display:none}
+.mv-card h4{margin:0;font-size:1.05rem}
+.mv-card .sub{color:var(--ink2);font-size:.9rem;margin:.15rem 0 0}
+.mv-card .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.mv-card .acts a,.mv-card .acts button{font-size:.88rem;text-decoration:none;background:var(--cobalto-soft);color:var(--cobalto);border:0;border-radius:8px;padding:7px 11px;cursor:pointer;font-weight:700}
+.lbl{font-family:"Atkinson Hyperlegible",system-ui,sans-serif;paint-order:stroke;stroke:var(--paper);stroke-linejoin:round}
+
+.routes{display:flex;flex-direction:column;gap:8px;margin:14px 0 6px}
+.routes a{display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;background:var(--cobalto-soft);color:var(--cobalto);border-radius:10px;padding:11px 14px;font-weight:700;font-size:.95rem}
+.routes a span{font-weight:400;color:var(--ink2);font-size:.85rem;white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px;font-size:.85rem;color:var(--ink2)}
+
+ol.plan{list-style:none;margin:10px 0 0;padding:0}
+.walk{display:flex;align-items:center;gap:8px;margin:0 0 0 27px;padding:6px 0 6px 18px;border-left:2px dotted var(--albero);font-size:.85rem;color:var(--ink2)}
+.walk.car{border-left-style:solid;border-left-color:var(--ink2)}
+.stop{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:start;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px}
+.stop.pausa{background:transparent;border-style:dashed}
+.stop.done{opacity:.55}
+.stop.done h3{text-decoration:line-through}
+.when{font-weight:700;font-variant-numeric:tabular-nums;font-size:.95rem;padding-top:2px}
+.pin{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--cobalto);color:var(--paper);font-size:.78rem;font-weight:700;margin-top:6px}
+.pin.v{background:var(--almagra)}
+.pin.home{border-radius:5px;background:var(--almagra)}
+.stop h3{margin:0;font-size:1.05rem;line-height:1.3}
+.stop p{margin:.3rem 0 0;font-size:.93rem;color:var(--ink2)}
+.tag{display:inline-block;font-size:.75rem;padding:1px 8px;border-radius:999px;margin-top:4px;border:1px solid var(--line);color:var(--ink2)}
+.tag.visita{background:var(--almagra);border-color:var(--almagra);color:var(--paper)}
+.tag.fuera{border-color:var(--cobalto);color:var(--cobalto)}
+.tag.opcional{border-style:dashed;border-color:var(--albero);color:var(--albero);background:var(--albero-soft)}
+.stop .links{display:flex;gap:14px;margin-top:6px;font-size:.88rem}
+.stop .links button{background:none;border:0;padding:0;color:var(--cobalto);text-decoration:underline;cursor:pointer;font-size:.88rem}
+.check{appearance:none;-webkit-appearance:none;width:26px;height:26px;border:2px solid var(--line);border-radius:7px;margin:0;cursor:pointer;display:grid;place-items:center;background:var(--paper)}
+.check:checked{background:var(--cobalto);border-color:var(--cobalto)}
+.check:checked::after{content:"";width:7px;height:13px;border:solid var(--paper);border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
+li.item{margin:0}
+.flash{animation:flash 1.2s ease}
+@keyframes flash{0%{box-shadow:0 0 0 3px var(--albero)}100%{box-shadow:0 0 0 0 transparent}}
+@media (prefers-reduced-motion: reduce){.flash{animation:none}}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:14px 0}
+.card h3{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:1.3rem;margin:0 0 6px;color:var(--cobalto)}
+.card ul{margin:.3rem 0 0;padding-left:1.1rem}
+.card li{margin:.35rem 0}
+.bar{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
+.bar:first-of-type{border-top:0}
+.bar small{display:block;color:var(--ink2);font-size:.88rem}
+.bar .bl{display:flex;gap:12px;align-items:center;white-space:nowrap;font-size:.88rem}
+.bar .bl button{background:none;border:0;padding:0;color:var(--cobalto);text-decoration:underline;cursor:pointer;font-size:.88rem}
+.intro{color:var(--ink2);margin:0 0 6px}
+.mymaps{display:flex;justify-content:space-between;align-items:center;gap:12px;text-decoration:none;background:var(--cobalto);color:var(--paper);border-radius:12px;padding:13px 16px;margin:0 0 14px}
+.mymaps b{display:block;font-size:1rem}
+.mymaps small{display:block;font-size:.85rem;opacity:.85}
+.mymaps>span:last-child{font-size:1.3rem}
+footer{color:var(--ink2);font-size:.85rem;margin-top:28px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Sevilla</h1>
+    <p>Del 2 al 4 de octubre. Cinco amigas, cuarenta años. Base en la calle Susona, Barrio Santa Cruz.</p>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Secciones">
+    <button role="tab" data-tab="vie" aria-selected="true">Viernes 2</button>
+    <button role="tab" data-tab="sab" aria-selected="false">Sábado 3</button>
+    <button role="tab" data-tab="dom" aria-selected="false">Domingo 4</button>
+    <button role="tab" data-tab="mapa" aria-selected="false">Mapa</button>
+    <button role="tab" data-tab="bares" aria-selected="false">Bares</button>
+    <button role="tab" data-tab="info" aria-selected="false">Info</button>
+  </nav>
+
+  <main id="main"></main>
+
+  <section class="panel" id="p-mapa" role="tabpanel">
+    <a class="mymaps" href="https://www.google.com/maps/d/viewer?mid=1mtn049Rt5YUR6Nk8xR9pRjfkRlh6Nrc" target="_blank" rel="noopener">
+      <span><b>Abrir el mapa en Google My Maps</b><small>Mapa real de Google con todo junto, vuestra ubicación y rutas</small></span><span aria-hidden="true">↗</span></a>
+    <p class="intro">Todo junto: monumentos de los tres días y bares. Toca los botones de arriba para mostrar u ocultar grupos, y cualquier punto para ver cómo llegar.</p>
+    <div id="map-all"></div>
+  </section>
+
+  <section class="panel" id="p-bares" role="tabpanel">
+    <p class="intro">Sin asignar a propósito: elegid sobre la marcha según por dónde os pille. "Ver en el mapa" lo sitúa en la pestaña Mapa.</p>
+    <div id="bares"></div>
+  </section>
+
+  <section class="panel" id="p-info" role="tabpanel">
+    <div class="card">
+      <h3>Horas que no se mueven</h3>
+      <ul>
+        <li><b>Viernes 13:00</b>: Real Alcázar (entradas compradas). Llegar a las 12:45 a la Puerta del León.</li>
+        <li><b>Sábado antes de las 14:00</b>: Basílica de la Macarena (abre de 8 a 14 y de 17 a 21h).</li>
+        <li><b>Sábado 19:30 a 21:00</b>: Setas, flamenco primero. Llegar a las 19:15.</li>
+        <li><b>Domingo 11:00 a 14:00</b>: Esperanza de Triana, gratis.</li>
+        <li><b>Domingo 15:00</b>: Uber al aeropuerto. Vuelo a las 17:30.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>El mapa</h3>
+      <ul>
+        <li>Se mueve con un dedo y se amplía pellizcando, como Google Maps. Al ampliar aparecen los nombres de calles y bares.</li>
+        <li>El botón ◎ muestra dónde estáis (hay que dar permiso de ubicación al navegador).</li>
+        <li>Para el mapa real de Google con todo: <a href="https://www.google.com/maps/d/viewer?mid=1mtn049Rt5YUR6Nk8xR9pRjfkRlh6Nrc" target="_blank" rel="noopener">abrir en My Maps</a>.</li>
+        <li>Calles y parques están dibujados a mano y son orientativos; los puntos de monumentos y bares sí son exactos. Para navegar, "Cómo llegar" abre Google Maps.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Moverse</h3>
+      <ul>
+        <li>Sois 5: un Uber normal lleva 4. Pedid <b>Uber XL</b> o dos coches. El XL a veces tarda más en llegar, pedidlo con 10 min de margen.</li>
+        <li>Aeropuerto y centro: unos 25-30 min en coche.</li>
+        <li>Los tiempos andando son a ritmo de Google Maps con un 15-20% de margen. Las horas son orientativas.</li>
+        <li>Atardece sobre las 20:05. El viernes el paseo al río está pensado para cruzar el puente de Triana con esa luz.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Qué he cambiado del plan original</h3>
+      <ul>
+        <li>El <b>vermut de Santa Cruz</b> pasa a después del Alcázar. Antes de las 13:00 no daba tiempo, y el barrio está a la salida del Alcázar y al lado de casa.</li>
+        <li><b>Torre del Oro y Maestranza</b> pasan al viernes por la tarde: están de camino a Triana, y así el domingo, que va justo por el vuelo, queda más ligero.</li>
+        <li>El domingo empieza en el puente de Triana y va en círculo por el barrio para acabar en la calle Betis, a 20 min de la consigna.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Si vais justas, quitad esto primero</h3>
+      <ul>
+        <li>Viernes: Plaza del Cabildo y el paseo largo por el Parque de María Luisa.</li>
+        <li>Sábado: Casa de Pilatos (es un desvío hacia el este).</li>
+        <li>Domingo: patios y corrales, y subir al campanario de la Capilla del Carmen.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Mochilas</h3>
+      <ul>
+        <li>Viernes: si el apartamento no confirma, buscad consigna por Santa Cruz o Puerta de Jerez antes de desayunar.</li>
+        <li>Domingo: dejarlas en la consigna al hacer check-out, recogerlas a las 14:45.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Marca cada sitio al verlo: se queda guardado en este móvil.</footer>
+</div>
+
+<script>
+/*DATA*/
+const CASA=[37.38445,-5.99028], AIR=[37.41800,-5.89310];
+const DAYS=[
+{id:'vie',title:'Viernes 2',sub:'Parque, Catedral, Alcázar y atardecer en Triana',color:'--cobalto',
+ items:[
+  {id:'lleg',t:'08:00',n:'Llegada al aeropuerto',k:'pausa',ll:AIR,p:'Uber XL (5 plazas) o dos coches. Unos 25 min hasta el centro.'},
+  {id:'casa1',t:'08:40',n:'Apartamento, calle Susona',k:'pausa',ll:CASA,car:true,p:'Dejar mochilas. Si no confirman, consigna cercana.'},
+  {id:'des1',t:'09:00',n:'Desayuno por Santa Cruz',k:'pausa',p:'Opciones en Bares. Salir a las 09:45.'},
+  {id:'pesp',t:'10:05',n:'Plaza de España',k:'fuera',ll:[37.37720,-5.98689],pid:'ChIJD7G2bqduEg0ROdrTdOj1Jok',p:'El semicírculo, los bancos de azulejos de cada provincia y los puentes. A primera hora hay menos gente y menos calor.'},
+  {id:'parq',t:'10:45',n:'Parque de María Luisa',k:'opcional',ll:[37.37796,-5.98916],pid:'ChIJ7zUaHSRsEg0RQugeffDytmg',p:'Salir hacia el norte por la Glorieta de Bécquer. Si vais justas, id directas a la Fábrica de Tabacos.'},
+  {id:'taba',t:'11:10',n:'Real Fábrica de Tabacos',k:'fuera',ll:[37.38123,-5.99062],pid:'ChIJH7qRgRhsEg0R8V8j7TaEYFE',p:'Hoy es la Universidad. La entrada es libre y se puede asomar al patio y los pasillos.'},
+  {id:'telm',t:'11:25',n:'Palacio de San Telmo',k:'fuera',ll:[37.38024,-5.99362],pid:'ChIJSw3LVD1sEg0RUuT5-RrzNuY',p:'Portada barroca junto a la Puerta de Jerez.'},
+  {id:'cabi',t:'11:40',n:'Plaza del Cabildo',k:'opcional',ll:[37.38546,-5.99470],pid:'ChIJRZD0ThdsEg0Rl74SIGBvfok',p:'Plaza semicircular escondida en la avenida de la Constitución. Desvío de 2 minutos.'},
+  {id:'cate',t:'11:50',n:'Catedral y Giralda',k:'fuera',ll:[37.38662,-5.99332],pid:'ChIJnTxUDhpsEg0R2eZr8BzvlSg',p:'Rodearla: fachada de la avenida, Puerta del Perdón (calle Alemanes) y la Giralda desde la plaza Virgen de los Reyes. Dejad 10 min de margen antes del Alcázar.'},
+  {id:'alca',t:'12:45',n:'Real Alcázar',k:'visita',ll:[37.38452,-5.99215],pid:'ChIJIVCVBQBtEg0R5mgYSTYboHc',p:'Entrada a las 13:00 por la Puerta del León, en la plaza del Triunfo. Calculad unas 2 h entre palacios y jardines.'},
+  {id:'scru',t:'15:00',n:'Paseo por el Barrio Santa Cruz',k:'fuera',ll:[37.38473,-5.99046],pid:'ChIJl6iBbRlsEg0ROpV4aSTUEXk',p:'Callejón del Agua, plaza de Doña Elvira, plaza de Santa Cruz y Mateos Gago. Está a la salida del Alcázar.'},
+  {id:'verm',t:'15:15',n:'Vermut y comida en Santa Cruz',k:'pausa',p:'Opciones en Bares, apartado Santa Cruz.'},
+  {id:'casa2',t:'17:00',n:'Relax y ducha en casa',k:'pausa',ll:CASA,p:'Salir a las 19:00.'},
+  {id:'toro',t:'19:15',n:'Torre del Oro',k:'fuera',ll:[37.38245,-5.99631],pid:'ChIJZdsRrxZsEg0R5U_Sd56ZBHU',p:'Por la Puerta de Jerez hasta el río.'},
+  {id:'maes',t:'19:35',n:'Plaza de toros de la Maestranza',k:'fuera',ll:[37.38559,-5.99883],pid:'ChIJT1lG-hNsEg0RhQJkuQU7X0M',p:'Siguiendo el paseo de Colón junto al río.'},
+  {id:'ptri',t:'19:50',n:'Puente de Triana',k:'fuera',ll:[37.38642,-6.00228],pid:'ChIJpZArbhNsEg0REyn_TVfMC0w',p:'Atardece sobre las 20:05: cruzadlo con esa luz.'},
+  {id:'tapa',t:'20:15',n:'Tapas por Triana',k:'pausa',ll:[37.38527,-6.00288],pid:'ChIJe2PMoRRsEg0RNvBMUh5Mm5M',p:'Altozano y calle Betis. Opciones en Bares, apartado Triana. Vuelta a casa: unos 20 min andando o Uber XL.'}
+ ],
+ routes:[{l:'Mañana: casa → Alcázar',ids:['casa1','pesp','parq','taba','telm','cabi','cate','alca']},
+         {l:'Tarde: casa → Triana',ids:['casa2','toro','maes','ptri','tapa']}]
+},
+{id:'sab',title:'Sábado 3',sub:'Del centro a la Macarena, y noche en las Setas',color:'--verde',
+ items:[
+  {id:'des2',t:'09:00',n:'Desayuno',k:'pausa',p:'Bar El Comercio (churros) queda en la ruta, junto al Salvador. Opciones en Bares.'},
+  {id:'casa3',t:'09:45',n:'Salida de casa',k:'pausa',ll:CASA},
+  {id:'sfco',t:'10:00',n:'Plaza de San Francisco y fuente de Mercurio',k:'fuera',ll:[37.38870,-5.99410],pid:'ChIJpzlifhBsEg0R_H2p_o5lK4A',p:'La fuente está rematada por una figura de Mercurio. Fachada plateresca del Ayuntamiento.'},
+  {id:'pnue',t:'10:10',n:'Ayuntamiento y Plaza Nueva',k:'fuera',ll:[37.38885,-5.99585],p:'Rodead el Ayuntamiento para ver su otra fachada, la que da a la Plaza Nueva.'},
+  {id:'salv',t:'10:30',n:'Iglesia del Divino Salvador',k:'fuera',ll:[37.39000,-5.99284],pid:'ChIJa8bQvBpsEg0RuSzRTLicWAs',p:'La plaza del Salvador es de las más animadas del centro.'},
+  {id:'pila',t:'10:55',n:'Casa de Pilatos',k:'opcional',ll:[37.39000,-5.98721],pid:'ChIJNbFm6xxsEg0Rq59iZILsBgo',p:'Portada en la plaza de Pilatos, callejeando por la Alfalfa. Es el desvío más largo de la mañana.'},
+  {id:'duen',t:'11:20',n:'Palacio de las Dueñas',k:'fuera',ll:[37.39485,-5.98936],pid:'ChIJLYzAbARsEg0RY6dLRhmk4P4',p:'Portada de la calle Dueñas. Aquí nació Antonio Machado.'},
+  {id:'sluis',t:'11:40',n:'San Luis de los Franceses',k:'fuera',ll:[37.39841,-5.98811],pid:'ChIJnyEZNAFsEg0RYuZ5iJqoSvM',p:'Fachada barroca en la calle San Luis. Si os apetece entrar: 4 €, de martes a domingo de 10 a 14 y de 16 a 20h.'},
+  {id:'maca',t:'12:00',n:'Basílica de la Macarena',k:'visita',ll:[37.40259,-5.98942],pid:'ChIJwQanYTBrEg0RRCYkDLyHvlQ',p:'Sábados de 8 a 14 y de 17 a 21h. Al lado, el Arco de la Macarena y un tramo de muralla.'},
+  {id:'alam',t:'13:30',n:'Comida por la Alameda de Hércules',k:'pausa',ll:[37.39894,-5.99339],pid:'ChIJp3jWgQhsEg0R5lgwqvq1sko',p:'Opciones en Bares, apartado Alameda.'},
+  {id:'casa4',t:'15:30',n:'Vuelta a casa, relax y ducha',k:'pausa',ll:CASA,p:'Unos 30 min andando; con calor, Uber XL. Salir de casa a las 18:50.'},
+  {id:'seta',t:'19:10',n:'Setas de Sevilla',k:'visita',ll:[37.39298,-5.99216],pid:'ChIJH1SaEAVsEg0RxNL-4W2upL0',p:'De 19:30 a 21:00: flamenco primero, luego Feeling Sevilla, mirador 360º y luces. Llegar a las 19:15.'},
+  {id:'cena',t:'21:00',n:'Cena por las Setas',k:'pausa',p:'Opciones en Bares, apartado Setas.'}
+ ],
+ routes:[{l:'Mañana: casa → Macarena',ids:['casa3','sfco','pnue','salv','pila','duen','sluis','maca','alam']},
+         {l:'Tarde: casa → Setas',ids:['casa4','seta']}]
+},
+{id:'dom',title:'Domingo 4',sub:'Triana por la mañana y al aeropuerto',color:'--morado',
+ items:[
+  {id:'casa5',t:'08:45',n:'Desayuno y check-out',k:'pausa',ll:CASA,p:'Mochilas a la consigna. Salir hacia Triana a las 09:45.'},
+  {id:'ptri2',t:'10:05',n:'Puente de Triana',k:'fuera',ll:[37.38642,-6.00228],pid:'ChIJpZArbhNsEg0REyn_TVfMC0w',p:'Por la calle Reyes Católicos.'},
+  {id:'carm',t:'10:10',n:'Capilla del Carmen',k:'fuera',ll:[37.38576,-6.00303],pid:'ChIJZ30xZxNsEg0R2-fv70rvTbE',p:'La capillita al final del puente. Subir al campanario (1,50 €) es opcional; a veces está cerrada.'},
+  {id:'alto',t:'10:15',n:'Plaza del Altozano',k:'fuera',ll:[37.38527,-6.00288],pid:'ChIJe2PMoRRsEg0RNvBMUh5Mm5M'},
+  {id:'merc',t:'10:20',n:'Mercado de Triana y Castillo de San Jorge',k:'fuera',ll:[37.38571,-6.00361],pid:'ChIJqdxAVhNsEg0RupAyfuheU_E',p:'El castillo está bajo el mercado. El mercado abre también el domingo por la mañana.'},
+  {id:'inqu',t:'10:40',n:'Callejón de la Inquisición',k:'fuera',ll:[37.38611,-6.00407],pid:'ChIJQXZ8ThNsEg0RtwEOxya-ApI',p:'Baja del castillo al río y sale al paseo de la O.'},
+  {id:'arte',t:'10:45',n:'Paseo del Arte',k:'fuera',ll:[37.38690,-6.00420],pid:'ChIJ3VjfJ21sEg0RBDVIITMUzdM',p:'Mercadillo de artesanía los domingos por la mañana, bajo el puente por el paseo de la O.'},
+  {id:'espe',t:'11:30',n:'Esperanza de Triana',k:'visita',ll:[37.38402,-6.00109],pid:'ChIJy-NAXRRsEg0RykH1zciwpzA',p:'Capilla de los Marineros, calle Pureza. Domingos de 11 a 14h, gratis.'},
+  {id:'sana',t:'11:55',n:'Iglesia de Santa Ana',k:'fuera',ll:[37.38282,-6.00054],pid:'ChIJZ1LXNRRsEg0R1ye5rGQfEdg',p:'La catedral de Triana. Entrada 3 € si os apetece entrar.'},
+  {id:'corr',t:'12:10',n:'Patios y corrales',k:'opcional',p:'Callejear por Pureza, Pagés del Corro y alrededores buscando algún corral de vecinos abierto.'},
+  {id:'beti',t:'12:30',n:'Calle Betis',k:'fuera',ll:[37.38327,-5.99967],pid:'ChIJTVSBMxRsEg0RYKwgHRPw3Ts',p:'Junto al río, con la Torre del Oro enfrente.'},
+  {id:'comi',t:'12:45',n:'Vermut y comida en Triana',k:'pausa',p:'Opciones en Bares, apartado Triana. Pedir la cuenta a las 14:00.'},
+  {id:'casa6',t:'14:20',n:'Vuelta a por las mochilas',k:'pausa',ll:CASA,p:'Por el puente de San Telmo, unos 20 min. Si vais cansadas, Uber XL.'},
+  {id:'aero',t:'15:00',n:'Uber XL al aeropuerto',k:'pausa',ll:AIR,car:true,p:'Llegada sobre las 15:30 para el vuelo de las 17:30.'}
+ ],
+ routes:[{l:'Mañana en Triana',ids:['casa5','ptri2','carm','alto','merc','inqu','arte','espe','sana','beti']},
+         {l:'Betis → consigna',ids:['beti','casa6']}]
+}];
+
+const BARES=[
+ {z:'Desayuno',des:true,l:[
+  ['Bar El Comercio','churros',[37.39078,-5.99238],'ChIJn7ebyRpsEg0R4mdfa4uHpsw'],
+  ['Cafetería Aromas de San Román','molletes y tostadas',[37.39471,-5.98642],'ChIJyWuTJjhtEg0RCDpV8i4ObmA'],
+  ['La Cacharrería','brunch',[37.39468,-5.99144],'ChIJ4wpntxFsEg0RkoPbUYuDwkY'],
+  ['Tarta Home Triana','',[37.37843,-6.00286],'ChIJyzPLYwBtEg0Rb6ytMciEeiQ'],
+  ['La Campana','confitería en Sierpes',[37.39259,-5.99483],'ChIJsbt9lA9sEg0RcbpO_7WME2E'],
+  ['La Panocha','',[37.39044,-5.99554],'ChIJI84cnl9tEg0R-eRre-_hL0w']]},
+ {z:'Centro y Catedral',l:[
+  ['Casa Morales','carrillá en salsa',[37.38647,-5.99461],'ChIJmf09pRBsEg0Rqg4J-ueEfmo'],
+  ['Casa Moreno','montaditos',[37.38743,-5.99590],'ChIJ1cbU5RBsEg0R0f6LShz1phs'],
+  ['Bodeguita Antonio Romero','piripi; hay varios locales, este es el de Antonia Díaz',[37.38568,-5.99728],'ChIJJYk-MxFsEg0RQx6OlNz21EY'],
+  ['Bodeguita del Salvador','solomillo al whisky; en la plaza del Salvador',[37.38987,-5.99325],'ChIJa7mepBpsEg0RRmZHjzZjWqQ'],
+  ['Bodeguita Blanco Cerrillo','adobo',[37.39131,-5.99572],'ChIJoS1x2Q9sEg0RLVth8nTCmOY'],
+  ['Bar Postiguillo','cola de toro',[37.38522,-5.99540],'ChIJi-cDMRdsEg0RFOWIqLJARLM'],
+  ['Bodega Díaz Salazar','',[37.38652,-5.99506],'ChIJcSI-uBBsEg0RoP27WgIay_w'],
+  ['Pepe Hillo','recomendación de Marcos',[37.38682,-5.99876],'ChIJZRi0XxFsEg0RVF9YO3rcnIU']]},
+ {z:'Barrio Santa Cruz',l:[
+  ['Bodega Santa Cruz Las Columnas','pringá',[37.38602,-5.99076],'ChIJr6w91htsEg0RJ7OrcxZD8Eg'],
+  ['Bodega Álvaro Peregil','vino naranja',[37.38611,-5.99055],'ChIJf5d21xtsEg0R0MSsjQXB7T4'],
+  ['Las Teresas','papas aliñás',[37.38597,-5.98931],'ChIJ88t_VxlsEg0R2RwZljCB4SM'],
+  ['La Fresquita','recomendación de Marcos',[37.38669,-5.98987],'ChIJ9yJE3RtsEg0RSFt9LJ7aCMw']]},
+ {z:'Triana',l:[
+  ['Triana Bar','tapas baratas',[37.38512,-6.00866],'ChIJS5139WtsEg0Rdun6mP7yAdM'],
+  ['Las Golondrinas','pajaritos y puntas de solomillo; local de Pagés del Corro',[37.38402,-6.00562],'ChIJbfbf3MdtEg0R0Evmdj9SMpU'],
+  ['Paco España','recomendación de Marcos',[37.38513,-6.00511],'ChIJN-2tWWtsEg0RbkQYkg_EKdE'],
+  ['Freiduría Reina Victoria','pescaíto frito',[37.38328,-6.00225],'ChIJkf9X-hRsEg0RVYAvBHv9ZFg'],
+  ['Blanca Paloma','papas aliñás, gambas al ajillo y boquerones',[37.38311,-6.00582],'ChIJq6omOWtsEg0RRNvQAmOhPX4'],
+  ['Taberna Sol y Sombra','de las más míticas de Triana; rabo de toro',[37.38913,-6.00990],'ChIJZx4dC25sEg0R0SzWiLmlQhQ']]},
+ {z:'Setas',l:[
+  ['Patio San Eloy','',[37.39225,-5.99594],'ChIJy2XNyQ9sEg0Rus-gtjrfsBk'],
+  ['El Rinconcillo','',[37.39339,-5.98836],'ChIJObo_YwNsEg0RIGq8Rqq0ojA']]},
+ {z:'Alameda de Hércules',l:[
+  ['Casa Ricardo','croquetas',[37.39758,-5.99589],'ChIJ9Xez3QhsEg0RnK7oTT-wCn0']]}
+];
+/*ENDDATA*/
+
+/* ---------- Base cartográfica (dibujada a mano, orientativa) ---------- */
+const RIVER=[[37.3995,-6.0078],[37.3960,-6.0070],[37.3925,-6.0058],[37.3895,-6.0044],[37.3875,-6.0029],[37.3860,-6.0014],[37.3845,-5.9997],[37.3832,-5.9982],[37.3822,-5.9969],[37.3805,-5.9959],[37.3775,-5.9950],[37.3735,-5.9940],[37.3680,-5.9930],[37.3630,-5.9922]];
+const STREETS=[
+ {n:'Av. de la Constitución',w:6,p:[[37.3822,-5.9942],[37.3848,-5.9942],[37.3870,-5.9943],[37.3887,-5.9941]]},
+ {n:'Paseo de Colón',w:6,p:[[37.3800,-5.9945],[37.3824,-5.9959],[37.3845,-5.9975],[37.3862,-5.9993],[37.3880,-6.0012]]},
+ {n:'Reyes Católicos',w:5,p:[[37.3880,-5.9960],[37.3868,-5.9998]]},
+ {n:'Puente de Triana',w:6,p:[[37.3868,-5.9998],[37.3861,-6.0028]]},
+ {n:'C/ Betis',w:5,p:[[37.3812,-5.9981],[37.3833,-6.0001],[37.3852,-6.0022]]},
+ {n:'San Jacinto',w:5,p:[[37.3852,-6.0030],[37.3838,-6.0045],[37.3822,-6.0062]]},
+ {n:'Pureza',w:4,p:[[37.3850,-6.0027],[37.3840,-6.0012],[37.3826,-6.0002],[37.3812,-5.9993]]},
+ {n:'C/ Castilla',w:4,p:[[37.3862,-6.0040],[37.3880,-6.0065],[37.3895,-6.0095]]},
+ {n:'Puente de San Telmo',w:6,p:[[37.3812,-5.9952],[37.3803,-5.9990]]},
+ {n:'San Fernando',w:5,p:[[37.3822,-5.9942],[37.3816,-5.9905],[37.3810,-5.9875]]},
+ {n:'Menéndez Pelayo',w:6,p:[[37.3810,-5.9875],[37.3845,-5.9868],[37.3880,-5.9855],[37.3910,-5.9845]]},
+ {n:'Av. Isabel la Católica',w:5,p:[[37.3810,-5.9875],[37.3790,-5.9862],[37.3765,-5.9848]]},
+ {n:'Paseo de las Delicias',w:5,p:[[37.3800,-5.9945],[37.3770,-5.9932],[37.3720,-5.9922]]},
+ {n:'Sierpes',w:4,p:[[37.3890,-5.9947],[37.3926,-5.9950]]},
+ {n:'Mateos Gago',w:4,p:[[37.3861,-5.9921],[37.3869,-5.9893]]},
+ {n:'San Luis',w:4,p:[[37.3950,-5.9880],[37.3985,-5.9882],[37.4022,-5.9893]]},
+ {n:'Feria',w:4,p:[[37.3935,-5.9905],[37.3980,-5.9900],[37.4025,-5.9900]]},
+ {n:'Resolana',w:6,p:[[37.4032,-5.9990],[37.4032,-5.9895]]}
+];
+const PARKS=[
+ {n:'Parque de María Luisa',p:[[37.3790,-5.9925],[37.3792,-5.9885],[37.3780,-5.9862],[37.3740,-5.9846],[37.3690,-5.9858],[37.3665,-5.9895],[37.3690,-5.9926],[37.3745,-5.9933]]},
+ {n:'Jardines del Alcázar',p:[[37.3846,-5.9930],[37.3846,-5.9912],[37.3830,-5.9900],[37.3812,-5.9895],[37.3806,-5.9915],[37.3824,-5.9934]]},
+ {n:'Jardines de Murillo',p:[[37.3838,-5.9894],[37.3812,-5.9888],[37.3810,-5.9880],[37.3836,-5.9884]]},
+ {n:'Jardines de San Telmo',p:[[37.3797,-5.9950],[37.3798,-5.9925],[37.3790,-5.9925],[37.3790,-5.9948]]}
+];
+const PLAZAS=[
+ {p:[[37.3870,-5.9943],[37.3870,-5.9921],[37.3851,-5.9919],[37.3850,-5.9941]],bldg:true,n:'Catedral'},
+ {p:[[37.3935,-5.9928],[37.3935,-5.9914],[37.3924,-5.9914],[37.3924,-5.9928]],n:'Setas'},
+ {p:[[37.3965,-5.9942],[37.4012,-5.9941],[37.4012,-5.9927],[37.3965,-5.9928]],n:'Alameda'},
+ {p:[[37.3830,-6.0000],[37.3864,-5.9993],[37.3862,-5.9980],[37.3850,-5.9980]],bldg:true,n:'Maestranza',circle:[37.3856,-5.9988,55]},
+ {p:[],circle:[37.37720,-5.98650,105],n:'Plaza de España'}
+];
+const AREAS=[['Santa Cruz',[37.3862,-5.9895]],['Arenal',[37.3862,-5.9965]],['Triana',[37.3832,-6.0040]],['Alfalfa',[37.3910,-5.9885]],['Macarena',[37.4008,-5.9868]],['Centro',[37.3915,-5.9935]],['San Bernardo',[37.3825,-5.9845]]];
+
+/* ---------- utilidades ---------- */
+const TAG={visita:'Visita',fuera:'Por fuera',opcional:'Opcional'};
+const same=(a,b)=>a&&b&&a[0]===b[0]&&a[1]===b[1];
+const isAir=ll=>same(ll,AIR), isCasa=ll=>same(ll,CASA);
+function hav(a,b){const R=6371000,r=Math.PI/180,dl=(b[0]-a[0])*r,dg=(b[1]-a[1])*r;
+ const h=Math.sin(dl/2)**2+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dg/2)**2;return 2*R*Math.asin(Math.sqrt(h));}
+const walkM=(a,b)=>hav(a,b)*1.3;
+const mins=m=>Math.max(1,Math.round(m/70));
+const km=m=>(m/1000).toFixed(1).replace('.',',');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function placeURL(name,pid,ll){
+ if(pid)return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(name+', Sevilla')+'&query_place_id='+pid;
+ if(ll)return 'https://www.google.com/maps/search/?api=1&query='+ll[0].toFixed(5)+','+ll[1].toFixed(5);
+ return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(name+', Sevilla');}
+const llq=ll=>ll[0].toFixed(5)+','+ll[1].toFixed(5);
+const walkTo=ll=>'https://www.google.com/maps/dir/?api=1&destination='+llq(ll)+'&travelmode=walking';
+function dirURL(pts){const o=llq(pts[0]),d=llq(pts[pts.length-1]),w=pts.slice(1,-1).map(llq).join('|');
+ return 'https://www.google.com/maps/dir/?api=1&origin='+o+'&destination='+d+(w?'&waypoints='+encodeURIComponent(w):'')+'&travelmode=walking';}
+
+let seen={};try{seen=JSON.parse(localStorage.getItem('sev-visto-v1')||'{}')||{}}catch(e){seen={}}
+function save(){try{localStorage.setItem('sev-visto-v1',JSON.stringify(seen))}catch(e){}}
+
+/* ---------- proyección ---------- */
+const O={lat:37.39,lng:-5.995,kx:111320*Math.cos(37.39*Math.PI/180),ky:110540};
+const PX=ll=>[(ll[1]-O.lng)*O.kx,(O.lat-ll[0])*O.ky];
+const pts2=a=>a.map(ll=>PX(ll).map(v=>v.toFixed(1)).join(',')).join(' ');
+
+function baseSVG(){
+ let s=`<rect x="-20000" y="-20000" width="40000" height="40000" fill="var(--land)"/>`;
+ PARKS.forEach(p=>{s+=`<polygon points="${pts2(p.p)}" fill="var(--park)" stroke="var(--parkline)" stroke-width="1" vector-effect="non-scaling-stroke"/>`});
+ s+=`<polyline points="${pts2(RIVER)}" fill="none" stroke="var(--river)" stroke-width="115" stroke-linecap="round" stroke-linejoin="round"/>`;
+ STREETS.forEach(st=>{s+=`<polyline points="${pts2(st.p)}" fill="none" stroke="var(--casing)" stroke-width="${st.w+2.5}" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`});
+ STREETS.forEach(st=>{s+=`<polyline points="${pts2(st.p)}" fill="none" stroke="var(--street)" stroke-width="${st.w}" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`});
+ PLAZAS.forEach(p=>{
+  if(p.circle){const [x,y]=PX([p.circle[0],p.circle[1]]);s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${p.circle[2]}" fill="${p.bldg?'var(--bldg)':'var(--plaza)'}" stroke="var(--casing)" stroke-width="1" vector-effect="non-scaling-stroke"/>`;}
+  else s+=`<polygon points="${pts2(p.p)}" fill="${p.bldg?'var(--bldg)':'var(--plaza)'}" stroke="var(--casing)" stroke-width="1" vector-effect="non-scaling-stroke"/>`;
+ });
+ return s;
+}
+const BASE=baseSVG();
+
+/* ---------- ubicación compartida ---------- */
+const GEO={pos:null,watch:null,maps:new Set(),err:null};
+function startGeo(cb){
+ if(!('geolocation' in navigator)){cb&&cb('Este navegador no permite la ubicación.');return;}
+ if(GEO.watch!==null){cb&&cb(GEO.pos?null:GEO.err);return;}
+ try{
+  GEO.watch=navigator.geolocation.watchPosition(p=>{GEO.pos=[p.coords.latitude,p.coords.longitude];GEO.err=null;GEO.maps.forEach(m=>m.updateMe());cb&&cb(null);cb=null;},
+   e=>{GEO.err='No se ha podido obtener la ubicación. Revisa que el navegador tenga permiso de ubicación.';GEO.watch=null;cb&&cb(GEO.err);cb=null;},
+   {enableHighAccuracy:true,maximumAge:15000,timeout:15000});
+ }catch(e){cb&&cb('No se ha podido obtener la ubicación.');}
+}
+
+/* ---------- componente de mapa ---------- */
+function makeMap(host,cfg){
+ host.innerHTML=`<div class="mv ${cfg.big?'big':''}"><svg aria-label="${esc(cfg.aria)}" role="img"><g class="base">${BASE}</g><g class="route"></g><g class="streetlbl"></g><g class="arealbl"></g><g class="pins"></g><g class="meg"></g></svg>
+  <div class="mv-chips"></div>
+  <div class="mv-ctrl"><button data-z="in" aria-label="Acercar">+</button><button data-z="out" aria-label="Alejar">−</button><button data-z="fit" aria-label="Ver todo">⤢</button><button data-z="me" class="me" aria-label="Dónde estoy">◎</button></div>
+  <div class="mv-hint">Arrastra y pellizca para moverte</div></div><div class="mv-card" hidden></div>`;
+ const svg=host.querySelector('svg'),gPins=host.querySelector('.pins'),gRoute=host.querySelector('.route'),gSL=host.querySelector('.streetlbl'),gAL=host.querySelector('.arealbl'),gMe=host.querySelector('.meg'),card=host.querySelector('.mv-card'),chips=host.querySelector('.mv-chips');
+ const pins=cfg.pins.map(p=>Object.assign({},p,{xy:PX(p.ll)}));
+ const visible=new Set(cfg.groups.filter(g=>g.on).map(g=>g.id));
+ let vx=0,vy=0,vw=2000,W=1,H=1,upp=1,sel=null,fitted=false;
+
+ // rutas
+ if(cfg.routes){gRoute.innerHTML=cfg.routes.map(r=>`<polyline points="${pts2(r)}" fill="none" stroke="var(--albero)" stroke-width="4" stroke-dasharray="1 8" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`).join('');}
+
+ // etiquetas de calles y barrios
+ const sl=STREETS.map(st=>{const a=PX(st.p[0]),b=PX(st.p[st.p.length-1]);let ang=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;if(ang>90)ang-=180;if(ang<-90)ang+=180;
+  const mid=PX(st.p[Math.floor((st.p.length-1)/2)]),mid2=PX(st.p[Math.ceil((st.p.length-1)/2)]);return {n:st.n,x:(mid[0]+mid2[0])/2,y:(mid[1]+mid2[1])/2,ang}});
+ gSL.innerHTML=sl.map(l=>`<g data-x="${l.x}" data-y="${l.y}"><text class="lbl" transform="rotate(${l.ang.toFixed(1)})" text-anchor="middle" y="4" font-size="11" fill="var(--ink2)" stroke-width="3">${esc(l.n)}</text></g>`).join('');
+ const riv=PX([37.3912,-6.0057]);
+ gAL.innerHTML=AREAS.map(([n,ll])=>{const [x,y]=PX(ll);return `<g data-x="${x}" data-y="${y}"><text class="lbl" text-anchor="middle" font-size="13" font-style="italic" font-weight="700" fill="var(--ink2)" stroke-width="3" opacity=".75">${esc(n)}</text></g>`}).join('')+
+  `<g data-x="${riv[0]}" data-y="${riv[1]}"><text class="lbl" transform="rotate(-58)" text-anchor="middle" font-size="12" font-style="italic" fill="var(--cobalto)" stroke-width="0" opacity=".85">Guadalquivir</text></g>`+
+  PARKS.slice(0,1).map(p=>{const [x,y]=PX([37.3735,-5.9895]);return `<g data-x="${x}" data-y="${y}"><text class="lbl" text-anchor="middle" font-size="12" font-style="italic" fill="var(--verde)" stroke-width="3">Parque de María Luisa</text></g>`}).join('');
+
+ // chips
+ if(cfg.groups.length>1){
+  chips.innerHTML=cfg.groups.map(g=>`<button data-g="${g.id}" aria-pressed="${g.on}"><i style="background:var(${g.color})"></i>${esc(g.label)}</button>`).join('');
+  chips.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const id=b.dataset.g;
+   if(visible.has(id))visible.delete(id);else visible.add(id);b.setAttribute('aria-pressed',visible.has(id));drawPins();update();});
+ }
+
+ function pinSVG(p){
+  const lab=p.label?`<text class="lbl plabel" x="${p.shape==='dot'?11:17}" y="4" font-size="${p.shape==='dot'?11:12}" font-weight="700" fill="var(--ink)" stroke-width="3.5" style="display:none">${esc(p.label)}</text>`:'';
+  let m='';
+  if(p.shape==='casa')m=`<rect x="-13" y="-13" width="26" height="26" rx="6" fill="var(--almagra)" stroke="var(--paper)" stroke-width="2.5"/><path d="M-7 6V-1L0 -7L7 -1V6Z" fill="var(--paper)"/>`;
+  else if(p.shape==='dot')m=`<circle r="7.5" fill="var(${p.color})" stroke="var(--paper)" stroke-width="2.5"/>`;
+  else m=`<circle r="13" fill="var(${p.color})" stroke="var(--paper)" stroke-width="2.5"/><text y="4.5" text-anchor="middle" font-size="12" font-weight="700" fill="var(--paper)">${p.num??''}</text>`;
+  return `<g class="pk" data-id="${p.id}" style="cursor:pointer"><circle r="22" fill="transparent"/>${m}${lab}</g>`;
+ }
+ function drawPins(){
+  const vis=pins.filter(p=>visible.has(p.g));
+  vis.sort((a,b)=>(a.shape==='dot')-(b.shape==='dot')).reverse();
+  gPins.innerHTML=vis.map(pinSVG).join('');
+  if(sel&&!visible.has(sel.g)){sel=null;card.hidden=true;}
+ }
+ function place(g,x,y,s){g.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${s.toFixed(4)})`);}
+ function update(){
+  const r=svg.getBoundingClientRect();if(!r.width)return;W=r.width;H=r.height;upp=vw/W;const vh=H*upp;
+  svg.setAttribute('viewBox',`${vx.toFixed(1)} ${vy.toFixed(1)} ${vw.toFixed(1)} ${vh.toFixed(1)}`);
+  const byId=Object.fromEntries(pins.map(p=>[p.id,p]));
+  const items=[];
+  gPins.querySelectorAll('.pk').forEach(g=>{const p=byId[g.dataset.id];const isSel=!!(sel&&sel.id===p.id);
+   const k=(isSel?1.25:1)*(upp>4.5&&!isSel?0.8:1);place(g,p.xy[0],p.xy[1],upp*k);
+   const br=p.shape==='dot'?8:13;items.push({g,p,isSel,k,br,sx:(p.xy[0]-vx)/upp,sy:(p.xy[1]-vy)/upp,r:br*k});});
+  const pinBoxes=items.map(it=>[it.sx-it.r,it.sy-it.r,it.sx+it.r,it.sy+it.r,it]);
+  const pr=it=>it.isSel?1000:it.p.shape==='casa'?500:it.p.shape==='dot'?10:400-(it.p.num||0);
+  items.sort((a,b)=>pr(b)-pr(a));
+  const placed=[];const ov=(a,b)=>!(a[2]<b[0]||a[0]>b[2]||a[3]<b[1]||a[1]>b[3]);
+  const lim=cfg.alwaysLabels?6:4.2;
+  items.forEach(it=>{const t=it.g.querySelector('.plabel');if(!t)return;
+   const ok=it.isSel||(it.p.shape==='dot'?upp<3.2:upp<lim);
+   if(!ok){t.style.display='none';return;}
+   const fs=(it.p.shape==='dot'?11:12),w=it.p.label.length*fs*0.58*it.k,h=fs*1.3*it.k,offL=it.br+4,off=offL*it.k;
+   const cands=[[[it.sx+off,it.sy-h/2,it.sx+off+w,it.sy+h/2],'start',offL],[[it.sx-off-w,it.sy-h/2,it.sx-off,it.sy+h/2],'end',-offL]];
+   let ch=null;
+   for(const c of cands){const b=c[0];
+    if(!it.isSel&&(b[0]<2||b[2]>W-2||b[1]<2||b[3]>H-2||(b[2]>W-58&&b[1]<200)))continue;
+    if(!it.isSel&&(placed.some(q=>ov(b,q))||pinBoxes.some(q=>q[4]!==it&&ov(b,q))))continue;
+    ch=c;break;}
+   if(!ch&&it.isSel)ch=cands[0];
+   if(!ch){t.style.display='none';return;}
+   placed.push(ch[0]);t.style.display='';t.setAttribute('x',ch[2]);t.setAttribute('text-anchor',ch[1]);});
+  gSL.style.display=upp<2.6?'':'none';
+  gSL.querySelectorAll('g').forEach(g=>place(g,+g.dataset.x,+g.dataset.y,upp));
+  gAL.querySelectorAll('g').forEach(g=>place(g,+g.dataset.x,+g.dataset.y,upp));
+  updateMe();
+ }
+ function updateMe(){
+  if(!GEO.pos){gMe.innerHTML='';return;}
+  const [x,y]=PX(GEO.pos);
+  if(!gMe.firstChild)gMe.innerHTML=`<g><circle r="18" fill="var(--me)" opacity=".18"/><circle r="8" fill="var(--me)" stroke="#fff" stroke-width="3"/></g>`;
+  place(gMe.firstChild,x,y,upp);
+ }
+ function fit(){
+  const r=svg.getBoundingClientRect();if(!r.width)return false;W=r.width;H=r.height;
+  let src=pins.filter(p=>visible.has(p.g)&&(cfg.fitGroups?cfg.fitGroups.includes(p.g):true)&&!(cfg.fitGroups&&p.shape==='casa'));if(!src.length)src=pins.filter(p=>visible.has(p.g));
+  const xs=src.map(p=>p.xy[0]),ys=src.map(p=>p.xy[1]);
+  let x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const pl=34,prr=34,pt=62,pb=30;const w=Math.max(x1-x0,250),h=Math.max(y1-y0,250);
+  vw=Math.max(w/(W-pl-prr)*W,h/(H-pt-pb)*W);
+  const u=vw/W;vx=(x0+x1)/2-(pl+(W-pl-prr)/2)*u;vy=(y0+y1)/2-(pt+(H-pt-pb)/2)*u;
+  fitted=true;update();return true;
+ }
+ function zoomAt(f,mx,my){
+  const nw=Math.min(14000,Math.max(120,vw*f));const u=vw/W,nu=nw/W;
+  const wx=vx+mx*u,wy=vy+my*u;vx=wx-mx*nu;vy=wy-my*nu;vw=nw;update();
+ }
+ function select(id){
+  const p=pins.find(q=>q.id===id);if(!p)return;sel=p;update();
+  card.hidden=false;
+  card.innerHTML=`<h4>${esc(p.title)}</h4>${p.sub?`<p class="sub">${esc(p.sub)}</p>`:''}<div class="acts">
+   <a href="${walkTo(p.ll)}" target="_blank" rel="noopener">Cómo llegar andando</a>
+   <a href="${placeURL(p.title,p.pid,p.ll)}" target="_blank" rel="noopener">Ver en Google Maps</a>
+   ${p.stop?`<button data-jump="${p.stop}">Ver en el plan</button>`:''}</div>`;
+ }
+ card.addEventListener('click',e=>{const b=e.target.closest('[data-jump]');if(!b)return;const el=document.getElementById('s-'+b.dataset.jump);if(!el)return;
+  el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');});
+
+ // controles
+ host.querySelector('.mv-ctrl').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const z=b.dataset.z;
+  if(z==='in')zoomAt(0.6,W/2,H/2);else if(z==='out')zoomAt(1/0.6,W/2,H/2);else if(z==='fit')fit();
+  else if(z==='me'){startGeo(err=>{if(err){card.hidden=false;card.innerHTML=`<h4>Ubicación no disponible</h4><p class="sub">${esc(err)}</p>`;return;}
+   if(GEO.pos){const [x,y]=PX(GEO.pos);const u=vw/W;if(vw>1500){vw=1500;}const nu=vw/W;vx=x-W*nu/2;vy=y-H*nu/2;update();}});}
+ });
+
+ // gestos
+ const P=new Map();let start=null,moved=0,lastDist=0,downTarget=null;
+ svg.addEventListener('pointerdown',e=>{svg.setPointerCapture(e.pointerId);P.set(e.pointerId,[e.clientX,e.clientY]);
+  if(P.size===1){start=[e.clientX,e.clientY];moved=0;downTarget=e.target.closest('.pk');}
+  if(P.size===2){const a=[...P.values()];lastDist=Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1]);downTarget=null;}});
+ svg.addEventListener('pointermove',e=>{if(!P.has(e.pointerId))return;const prev=P.get(e.pointerId);P.set(e.pointerId,[e.clientX,e.clientY]);
+  if(P.size===1){const dx=e.clientX-prev[0],dy=e.clientY-prev[1];moved+=Math.abs(dx)+Math.abs(dy);vx-=dx*upp;vy-=dy*upp;update();}
+  else if(P.size===2){const a=[...P.values()];const d=Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1]);const r=svg.getBoundingClientRect();
+   const mx=(a[0][0]+a[1][0])/2-r.left,my=(a[0][1]+a[1][1])/2-r.top;if(lastDist)zoomAt(lastDist/d,mx,my);lastDist=d;moved+=99;}});
+ const up=e=>{if(!P.has(e.pointerId))return;P.delete(e.pointerId);
+  if(P.size===0){if(moved<8&&downTarget){select(downTarget.dataset.id);}else if(moved<8&&!downTarget){sel=null;card.hidden=true;update();}downTarget=null;lastDist=0;}
+  if(P.size===1){lastDist=0;}};
+ svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',up);
+ svg.addEventListener('wheel',e=>{e.preventDefault();const r=svg.getBoundingClientRect();zoomAt(e.deltaY>0?1.15:1/1.15,e.clientX-r.left,e.clientY-r.top);},{passive:false});
+ if('ResizeObserver' in window)new ResizeObserver(()=>{if(!fitted)fit();else update();}).observe(svg);
+
+ drawPins();GEO.maps.add({updateMe});
+ const api={fit,update,select,ensure(){if(!fitted)fit();else update();},show(g){if(!visible.has(g)){visible.add(g);const b=chips.querySelector(`[data-g="${g}"]`);if(b)b.setAttribute('aria-pressed','true');drawPins();}},
+  focus(id){const p=pins.find(q=>q.id===id);if(!p)return;api.show(p.g);if(!fitted)fit();vw=Math.min(vw,700);const u=vw/W;vx=p.xy[0]-W*u/2;vy=p.xy[1]-H*u/2;select(id);}};
+ return api;
+}
+
+/* ---------- pins de bares ---------- */
+const BAR_PINS=[];
+BARES.forEach((b,bi)=>b.l.forEach(([n,d,ll,pid],i)=>BAR_PINS.push({id:'bar'+bi+'_'+i,ll,pid,g:b.des?'des':'bares',shape:'dot',color:b.des?'--cafe':'--albero',label:n,title:n,sub:(b.z+(d?': '+d:''))})));
+
+/* ---------- días ---------- */
+const MAPS={};
+function renderDay(day){
+ let n=0,total=0,prev=null;
+ day.items.forEach(i=>{if(i.ll&&!isAir(i.ll)&&!isCasa(i.ll))i.num=++n;});
+ let list='';
+ day.items.forEach(i=>{
+  let conn='';
+  if(i.ll){
+   if(prev&&i.car){conn=`<div class="walk car">En coche, unos 25-30 min</div>`;}
+   else if(prev&&!isAir(prev)&&!isAir(i.ll)&&!same(prev,i.ll)){
+    const m=walkM(prev,i.ll);total+=m;
+    conn=`<div class="walk">${m<150?'Al lado':'Unos '+mins(m)+' min andando ('+km(m)+' km)'}</div>`;}
+   prev=i.ll;
+  }
+  const pin=i.num?`<span class="pin ${i.k==='visita'?'v':''}">${i.num}</span>`:(isCasa(i.ll)?`<span class="pin home" aria-hidden="true">⌂</span>`:'');
+  const tag=TAG[i.k]?`<span class="tag ${i.k}">${TAG[i.k]}</span>`:'';
+  const links=i.ll&&!isCasa(i.ll)&&!isAir(i.ll)?`<div class="links"><button data-mapfocus="${day.id}:${i.id}">Ver en el mapa</button><a href="${walkTo(i.ll)}" target="_blank" rel="noopener">Cómo llegar</a></div>`:'';
+  const key=day.id+':'+i.id, ck=!!seen[key];
+  list+=`<li class="item">${conn}<div class="stop ${i.k==='pausa'?'pausa':''} ${ck?'done':''}" id="s-${i.id}">
+   <div><div class="when">${i.t}</div>${pin}</div>
+   <div><h3>${esc(i.n)}</h3>${tag}${i.p?`<p>${esc(i.p)}</p>`:''}${links}</div>
+   <input type="checkbox" class="check" data-key="${key}" ${ck?'checked':''} aria-label="Marcar ${esc(i.n)} como visto">
+  </div></li>`;
+ });
+ const byId=Object.fromEntries(day.items.map(i=>[i.id,i]));
+ let routes='';
+ day.routes.forEach(r=>{
+  const pts=r.ids.map(id=>byId[id].ll);
+  const chunks=[];for(let k=0;k<pts.length-1;k+=4)chunks.push(pts.slice(k,k+5));
+  chunks.forEach((c,ix)=>{let d=0;for(let k=1;k<c.length;k++)d+=walkM(c[k-1],c[k]);
+   const lab=chunks.length>1?`${r.l} (parte ${ix+1} de ${chunks.length})`:r.l;
+   routes+=`<a href="${dirURL(c)}" target="_blank" rel="noopener">${lab}<span>${mins(d)} min</span></a>`;});
+ });
+ day.total=total;day.n=n;
+ return `<section class="panel" id="p-${day.id}" role="tabpanel">
+  <div class="plaque"><h2>${day.title}</h2><p>${day.sub}</p>
+   <div class="stats"><span><b>${km(total)} km</b> andando</span><span><b>${n}</b> paradas</span></div></div>
+  <div id="map-${day.id}"></div>
+  <div class="routes">${routes}</div>
+  <div class="legend"><span class="tag visita">Visita</span><span class="tag fuera">Por fuera</span><span class="tag opcional">Opcional</span></div>
+  <ol class="plan">${list}</ol>
+ </section>`;
+}
+document.getElementById('main').innerHTML=DAYS.map(renderDay).join('');
+
+function dayPins(day,group,colorAll){
+ const out=[];let casa=false;
+ day.items.forEach(i=>{if(!i.ll||isAir(i.ll))return;
+  if(isCasa(i.ll)){if(casa)return;casa=true;out.push({id:day.id+'-casa',ll:CASA,g:group,shape:'casa',label:'Casa',title:'Apartamento, calle Susona',sub:'Base del viaje',pid:'ChIJ6fqcFBlsEg0RgIK0ZHxSNFY'});return;}
+  out.push({id:day.id+'-'+i.id,ll:i.ll,pid:i.pid,g:group,num:i.num,color:colorAll||(i.k==='visita'?'--almagra':'--cobalto'),label:i.n.replace(/ y fuente de Mercurio| y Castillo de San Jorge/,''),title:i.n,sub:i.t+(i.p?'. '+i.p:''),stop:i.id});});
+ return out;
+}
+DAYS.forEach(day=>{
+ const pins=dayPins(day,'dia').concat(BAR_PINS.map(b=>Object.assign({},b)));
+ const byId=Object.fromEntries(day.items.map(i=>[i.id,i]));
+ const routes=day.routes.map(r=>r.ids.map(id=>byId[id].ll));
+ MAPS[day.id]=makeMap(document.getElementById('map-'+day.id),{aria:'Mapa del '+day.title,pins,routes,alwaysLabels:true,chipsPad:true,fitGroups:['dia'],
+  groups:[{id:'dia',label:'Ruta',color:day.color,on:true},{id:'bares',label:'Bares',color:'--albero',on:false},{id:'des',label:'Desayunos',color:'--cafe',on:false}]});
+});
+
+// mapa general
+(function(){
+ let pins=[];const seenCasa={};
+ DAYS.forEach(d=>{dayPins(d,d.id,d.color).forEach(p=>{if(p.shape==='casa'){if(seenCasa.x)return;seenCasa.x=1;p.g='casa';}
+   p.label=p.shape==='casa'?'Casa':p.label;pins.push(p);});});
+ pins=pins.concat(BAR_PINS);
+ MAPS.all=makeMap(document.getElementById('map-all'),{aria:'Mapa general',big:true,pins,chipsPad:true,
+  groups:[{id:'vie',label:'Viernes',color:'--cobalto',on:true},{id:'sab',label:'Sábado',color:'--verde',on:true},{id:'dom',label:'Domingo',color:'--morado',on:true},{id:'bares',label:'Bares',color:'--albero',on:true},{id:'des',label:'Desayunos',color:'--cafe',on:true},{id:'casa',label:'Casa',color:'--almagra',on:true}]});
+})();
+
+// bares
+document.getElementById('bares').innerHTML=BARES.map((b,bi)=>`<div class="card"><h3>${b.z}</h3>${b.l.map(([n,d,ll,pid],i)=>`<div class="bar"><div><b>${esc(n)}</b>${d?`<small>${esc(d)}</small>`:''}</div><div class="bl"><button data-barfocus="bar${bi}_${i}">Ver en el mapa</button><a href="${placeURL(n,pid,ll)}" target="_blank" rel="noopener">Maps</a></div></div>`).join('')}</div>`).join('');
+
+/* ---------- eventos ---------- */
+document.addEventListener('change',e=>{const c=e.target.closest('.check');if(!c)return;
+ const k=c.dataset.key;if(c.checked)seen[k]=true;else delete seen[k];save();c.closest('.stop').classList.toggle('done',c.checked);});
+document.addEventListener('click',e=>{
+ const f=e.target.closest('[data-mapfocus]');
+ if(f){const [d,id]=f.dataset.mapfocus.split(':');const host=document.getElementById('map-'+d);host.scrollIntoView({behavior:'smooth',block:'start'});MAPS[d].focus(d+'-'+id);return;}
+ const b=e.target.closest('[data-barfocus]');
+ if(b){show('mapa');requestAnimationFrame(()=>MAPS.all.focus(b.dataset.barfocus));}
+});
+
+const tabs=[...document.querySelectorAll('nav.tabs button')];
+function show(id){
+ tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===id?'true':'false'));
+ document.querySelectorAll('section.panel').forEach(s=>s.classList.toggle('on',s.id==='p-'+id));
+ try{sessionStorage.setItem('sev-tab',id)}catch(e){}
+ window.scrollTo({top:0});
+ const m=MAPS[id==='mapa'?'all':id];if(m)requestAnimationFrame(()=>m.ensure());
+}
+tabs.forEach(b=>b.addEventListener('click',()=>show(b.dataset.tab)));
+let start='vie';
+const today=new Date(),ymd=today.getFullYear()*10000+(today.getMonth()+1)*100+today.getDate();
+if(ymd===20261003)start='sab';else if(ymd===20261004)start='dom';
+try{const s=sessionStorage.getItem('sev-tab');if(s)start=s}catch(e){}
+show(start);
+</script>
+</body>
+</html>
